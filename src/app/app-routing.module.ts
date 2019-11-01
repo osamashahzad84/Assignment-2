@@ -12,9 +12,26 @@ const routes: Routes = [
     loadChildren: () => import('./home/home.module').then(m => m.HomePageModule)
   },
   {
-    path: 'list',
-    loadChildren: () => import('./list/list.module').then(m => m.ListPageModule)
-  }
+    path: 'movieslist',
+    children: [
+      {
+        path: '',
+        loadChildren:
+          './movieslist/movieslist.module#MovieslistPageModule'
+      },
+      {
+        path: ':id',
+        loadChildren: './movies/movies.module#MoviesPageModule'
+      }
+    ]
+  },
+  {
+    path: 'add-movie',
+    loadChildren: './add-movie/add-movie.module#AddMoviePageModule' 
+  },
+  { path: 'add-movie', loadChildren: './add-movie/add-movie.module#AddMoviePageModule' },
+  //{ path: 'movieslistitem', loadChildren: './src/app/movieslist/movieslistitem/movieslistitem.module#MovieslistitemPageModule' },
+  //{ path: 'movieslistitem', loadChildren: './movieslist/movieslistitem/movieslistitem.module#MovieslistitemPageModule' }
 ];
 
 @NgModule({
